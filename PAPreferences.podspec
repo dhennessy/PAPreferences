@@ -1,15 +1,12 @@
 Pod::Spec.new do |s|
   s.name         = "PAPreferences"
   s.version      = "0.1"
-  s.summary      = "A short description of PAPreferences."
+  s.summary      = "An easy way to store user preferences using NSUserDefaults."
 
   s.description  = <<-DESC
-                   A longer description of PAPreferences in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
+                   PAPreferences maps `dynamic` properties onto NSUserDefaults getters and setters so that you can access 
+                   defaults as if they were regular properties on an object. That object is normally a singleton since you 
+                   typically want a single set of preferences for the entire app.
                    DESC
 
   s.homepage     = "https://github.com/dhennessy/PAPreferences"

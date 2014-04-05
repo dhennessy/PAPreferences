@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		928DC8B518EF48D600D0AC26 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928DC8B418EF48D600D0AC26 /* Cocoa.framework */; };
+		928DC8BF18EF48D600D0AC26 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 928DC8BD18EF48D600D0AC26 /* InfoPlist.strings */; };
+		928DC8C118EF48D600D0AC26 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8C018EF48D600D0AC26 /* main.m */; };
+		928DC8C518EF48D600D0AC26 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 928DC8C318EF48D600D0AC26 /* Credits.rtf */; };
+		928DC8C818EF48D600D0AC26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8C718EF48D600D0AC26 /* AppDelegate.m */; };
+		928DC8CB18EF48D600D0AC26 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 928DC8C918EF48D600D0AC26 /* MainMenu.xib */; };
+		928DC8CD18EF48D600D0AC26 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 928DC8CC18EF48D600D0AC26 /* Images.xcassets */; };
+		928DC8D418EF48D600D0AC26 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928DC8D318EF48D600D0AC26 /* XCTest.framework */; };
+		928DC8D518EF48D600D0AC26 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928DC8B418EF48D600D0AC26 /* Cocoa.framework */; };
+		928DC8DD18EF48D600D0AC26 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 928DC8DB18EF48D600D0AC26 /* InfoPlist.strings */; };
+		928DC8ED18EF491F00D0AC26 /* PAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8EA18EF491F00D0AC26 /* PAPreferences.m */; };
+		928DC8EE18EF491F00D0AC26 /* PAPropertyDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8EC18EF491F00D0AC26 /* PAPropertyDescriptor.m */; };
+		928DC8F318EF49D000D0AC26 /* PAPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8F218EF49D000D0AC26 /* PAPreferencesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		928DC8D618EF48D600D0AC26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 928DC8A918EF48D600D0AC26 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 928DC8B018EF48D600D0AC26;
+			remoteInfo = PAPreferencesSampleOSX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		928DC8B118EF48D600D0AC26 /* PAPreferencesSampleOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PAPreferencesSampleOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		928DC8B418EF48D600D0AC26 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		928DC8B718EF48D600D0AC26 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		928DC8B818EF48D600D0AC26 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		928DC8B918EF48D600D0AC26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		928DC8BC18EF48D600D0AC26 /* PAPreferencesSampleOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PAPreferencesSampleOSX-Info.plist"; sourceTree = "<group>"; };
+		928DC8BE18EF48D600D0AC26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		928DC8C018EF48D600D0AC26 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		928DC8C218EF48D600D0AC26 /* PAPreferencesSampleOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PAPreferencesSampleOSX-Prefix.pch"; sourceTree = "<group>"; };
+		928DC8C418EF48D600D0AC26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		928DC8C618EF48D600D0AC26 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		928DC8C718EF48D600D0AC26 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		928DC8CA18EF48D600D0AC26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		928DC8CC18EF48D600D0AC26 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		928DC8D218EF48D600D0AC26 /* PAPreferencesSampleOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PAPreferencesSampleOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		928DC8D318EF48D600D0AC26 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		928DC8DA18EF48D600D0AC26 /* PAPreferencesSampleOSXTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PAPreferencesSampleOSXTests-Info.plist"; sourceTree = "<group>"; };
+		928DC8DC18EF48D600D0AC26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		928DC8E918EF491F00D0AC26 /* PAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPreferences.h; path = ../../../PAPreferences/PAPreferences.h; sourceTree = "<group>"; };
+		928DC8EA18EF491F00D0AC26 /* PAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPreferences.m; path = ../../../PAPreferences/PAPreferences.m; sourceTree = "<group>"; };
+		928DC8EB18EF491F00D0AC26 /* PAPropertyDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPropertyDescriptor.h; path = ../../../PAPreferences/PAPropertyDescriptor.h; sourceTree = "<group>"; };
+		928DC8EC18EF491F00D0AC26 /* PAPropertyDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPropertyDescriptor.m; path = ../../../PAPreferences/PAPropertyDescriptor.m; sourceTree = "<group>"; };
+		928DC8F218EF49D000D0AC26 /* PAPreferencesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPreferencesTests.m; path = ../../../PAPreferencesTests/PAPreferencesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		928DC8AE18EF48D600D0AC26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928DC8B518EF48D600D0AC26 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		928DC8CF18EF48D600D0AC26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928DC8D518EF48D600D0AC26 /* Cocoa.framework in Frameworks */,
+				928DC8D418EF48D600D0AC26 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		928DC8A818EF48D600D0AC26 = {
+			isa = PBXGroup;
+			children = (
+				928DC8BA18EF48D600D0AC26 /* PAPreferencesSampleOSX */,
+				928DC8D818EF48D600D0AC26 /* PAPreferencesTests */,
+				928DC8B318EF48D600D0AC26 /* Frameworks */,
+				928DC8B218EF48D600D0AC26 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		928DC8B218EF48D600D0AC26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8B118EF48D600D0AC26 /* PAPreferencesSampleOSX.app */,
+				928DC8D218EF48D600D0AC26 /* PAPreferencesSampleOSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		928DC8B318EF48D600D0AC26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8B418EF48D600D0AC26 /* Cocoa.framework */,
+				928DC8D318EF48D600D0AC26 /* XCTest.framework */,
+				928DC8B618EF48D600D0AC26 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		928DC8B618EF48D600D0AC26 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8B718EF48D600D0AC26 /* AppKit.framework */,
+				928DC8B818EF48D600D0AC26 /* CoreData.framework */,
+				928DC8B918EF48D600D0AC26 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		928DC8BA18EF48D600D0AC26 /* PAPreferencesSampleOSX */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8E818EF490E00D0AC26 /* PAPreferences */,
+				928DC8C618EF48D600D0AC26 /* AppDelegate.h */,
+				928DC8C718EF48D600D0AC26 /* AppDelegate.m */,
+				928DC8C918EF48D600D0AC26 /* MainMenu.xib */,
+				928DC8CC18EF48D600D0AC26 /* Images.xcassets */,
+				928DC8BB18EF48D600D0AC26 /* Supporting Files */,
+			);
+			path = PAPreferencesSampleOSX;
+			sourceTree = "<group>";
+		};
+		928DC8BB18EF48D600D0AC26 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8BC18EF48D600D0AC26 /* PAPreferencesSampleOSX-Info.plist */,
+				928DC8BD18EF48D600D0AC26 /* InfoPlist.strings */,
+				928DC8C018EF48D600D0AC26 /* main.m */,
+				928DC8C218EF48D600D0AC26 /* PAPreferencesSampleOSX-Prefix.pch */,
+				928DC8C318EF48D600D0AC26 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		928DC8D818EF48D600D0AC26 /* PAPreferencesTests */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8F218EF49D000D0AC26 /* PAPreferencesTests.m */,
+				928DC8D918EF48D600D0AC26 /* Supporting Files */,
+			);
+			name = PAPreferencesTests;
+			path = PAPreferencesSampleOSXTests;
+			sourceTree = "<group>";
+		};
+		928DC8D918EF48D600D0AC26 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8DA18EF48D600D0AC26 /* PAPreferencesSampleOSXTests-Info.plist */,
+				928DC8DB18EF48D600D0AC26 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		928DC8E818EF490E00D0AC26 /* PAPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				928DC8E918EF491F00D0AC26 /* PAPreferences.h */,
+				928DC8EA18EF491F00D0AC26 /* PAPreferences.m */,
+				928DC8EB18EF491F00D0AC26 /* PAPropertyDescriptor.h */,
+				928DC8EC18EF491F00D0AC26 /* PAPropertyDescriptor.m */,
+			);
+			name = PAPreferences;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		928DC8B018EF48D600D0AC26 /* PAPreferencesSampleOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 928DC8E218EF48D600D0AC26 /* Build configuration list for PBXNativeTarget "PAPreferencesSampleOSX" */;
+			buildPhases = (
+				928DC8AD18EF48D600D0AC26 /* Sources */,
+				928DC8AE18EF48D600D0AC26 /* Frameworks */,
+				928DC8AF18EF48D600D0AC26 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PAPreferencesSampleOSX;
+			productName = PAPreferencesSampleOSX;
+			productReference = 928DC8B118EF48D600D0AC26 /* PAPreferencesSampleOSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		928DC8D118EF48D600D0AC26 /* PAPreferencesSampleOSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 928DC8E518EF48D600D0AC26 /* Build configuration list for PBXNativeTarget "PAPreferencesSampleOSXTests" */;
+			buildPhases = (
+				928DC8CE18EF48D600D0AC26 /* Sources */,
+				928DC8CF18EF48D600D0AC26 /* Frameworks */,
+				928DC8D018EF48D600D0AC26 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				928DC8D718EF48D600D0AC26 /* PBXTargetDependency */,
+			);
+			name = PAPreferencesSampleOSXTests;
+			productName = PAPreferencesSampleOSXTests;
+			productReference = 928DC8D218EF48D600D0AC26 /* PAPreferencesSampleOSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		928DC8A918EF48D600D0AC26 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Denis Hennessy";
+				TargetAttributes = {
+					928DC8D118EF48D600D0AC26 = {
+						TestTargetID = 928DC8B018EF48D600D0AC26;
+					};
+				};
+			};
+			buildConfigurationList = 928DC8AC18EF48D600D0AC26 /* Build configuration list for PBXProject "PAPreferencesSampleOSX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 928DC8A818EF48D600D0AC26;
+			productRefGroup = 928DC8B218EF48D600D0AC26 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				928DC8B018EF48D600D0AC26 /* PAPreferencesSampleOSX */,
+				928DC8D118EF48D600D0AC26 /* PAPreferencesSampleOSXTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		928DC8AF18EF48D600D0AC26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928DC8BF18EF48D600D0AC26 /* InfoPlist.strings in Resources */,
+				928DC8CD18EF48D600D0AC26 /* Images.xcassets in Resources */,
+				928DC8C518EF48D600D0AC26 /* Credits.rtf in Resources */,
+				928DC8CB18EF48D600D0AC26 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		928DC8D018EF48D600D0AC26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928DC8DD18EF48D600D0AC26 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		928DC8AD18EF48D600D0AC26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928DC8ED18EF491F00D0AC26 /* PAPreferences.m in Sources */,
+				928DC8C818EF48D600D0AC26 /* AppDelegate.m in Sources */,
+				928DC8EE18EF491F00D0AC26 /* PAPropertyDescriptor.m in Sources */,
+				928DC8C118EF48D600D0AC26 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		928DC8CE18EF48D600D0AC26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928DC8F318EF49D000D0AC26 /* PAPreferencesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		928DC8D718EF48D600D0AC26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 928DC8B018EF48D600D0AC26 /* PAPreferencesSampleOSX */;
+			targetProxy = 928DC8D618EF48D600D0AC26 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		928DC8BD18EF48D600D0AC26 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				928DC8BE18EF48D600D0AC26 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		928DC8C318EF48D600D0AC26 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				928DC8C418EF48D600D0AC26 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		928DC8C918EF48D600D0AC26 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				928DC8CA18EF48D600D0AC26 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		928DC8DB18EF48D600D0AC26 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				928DC8DC18EF48D600D0AC26 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		928DC8E018EF48D600D0AC26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		928DC8E118EF48D600D0AC26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		928DC8E318EF48D600D0AC26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PAPreferencesSampleOSX/PAPreferencesSampleOSX-Prefix.pch";
+				INFOPLIST_FILE = "PAPreferencesSampleOSX/PAPreferencesSampleOSX-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		928DC8E418EF48D600D0AC26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PAPreferencesSampleOSX/PAPreferencesSampleOSX-Prefix.pch";
+				INFOPLIST_FILE = "PAPreferencesSampleOSX/PAPreferencesSampleOSX-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		928DC8E618EF48D600D0AC26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PAPreferencesSampleOSX.app/Contents/MacOS/PAPreferencesSampleOSX";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PAPreferencesSampleOSX/PAPreferencesSampleOSX-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PAPreferencesSampleOSXTests/PAPreferencesSampleOSXTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		928DC8E718EF48D600D0AC26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PAPreferencesSampleOSX.app/Contents/MacOS/PAPreferencesSampleOSX";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PAPreferencesSampleOSX/PAPreferencesSampleOSX-Prefix.pch";
+				INFOPLIST_FILE = "PAPreferencesSampleOSXTests/PAPreferencesSampleOSXTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		928DC8AC18EF48D600D0AC26 /* Build configuration list for PBXProject "PAPreferencesSampleOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				928DC8E018EF48D600D0AC26 /* Debug */,
+				928DC8E118EF48D600D0AC26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		928DC8E218EF48D600D0AC26 /* Build configuration list for PBXNativeTarget "PAPreferencesSampleOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				928DC8E318EF48D600D0AC26 /* Debug */,
+				928DC8E418EF48D600D0AC26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		928DC8E518EF48D600D0AC26 /* Build configuration list for PBXNativeTarget "PAPreferencesSampleOSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				928DC8E618EF48D600D0AC26 /* Debug */,
+				928DC8E718EF48D600D0AC26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 928DC8A918EF48D600D0AC26 /* Project object */;
+}

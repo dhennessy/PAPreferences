@@ -1,0 +1,134 @@
+# PAPreferences
+
+An easy way to store user preferences using NSUserDefaults.
+
+PAPreferences maps `dynamic` properties onto NSUserDefaults getters and setters so that you can access defaults as if they were regular properties on an object. That object is normally a singleton since you typically want a single set of preferences for the entire app.
+
+Works with iOS and OSX.
+
+## Adding PAPreferences to your project
+
+The simplest way to add PAPreferences to your project is to use [CocoaPods](http://cocoapods.org). 
+Add the following line to your Podfile:
+
+```
+	pod 'PAPreferences'
+```
+
+If you'd prefer to manually integrate it, just copy `PAPreferences/*.{m,h}` into your project.
+
+## Creating a Preferences Singleton
+
+First, create a subclass of PAPreferences with properties for your settings (note that all properties should have an `assign` storage specifier):
+
+```objective-c
+#import "PAPreferences.h"
+
+@interface MyPreferences : PAPreferences
+@property (nonatomic, assign) NSString *theme;
+@property (nonatomic, assign) NSArray *favorites;
+@property (nonatomic, assign) BOOL hasSeenIntro;
+@end
+```
+
+In the implementation file, mark each property as dynamic:
+
+```objective-c
+#import "MyPreferences.h"
+
+@implementation MyPreferences
+@dynamic theme;
+@dynamic favorites;
+@dynamic hasSeenIntro;
+@end
+```
+
+## Accessing the Preferences
+
+The `sharedInstance` class method can be used to access the singleton:
+
+```objective-c
+	if (![MyPreferences sharedInstance].hasSeenIntro) {
+		// ...
+		[MyPreferences sharedInstance].hasSeenIntro = YES;
+	}
+```
+
+## Supported Property Types
+
+PAPreferences supports the following property types:
+
+ * NSInteger
+ * NSString
+ * NSArray
+ * NSDictionary
+ * NSURL
+ * NSData
+ * BOOL
+ * float
+ * double
+
+## Updating UI when Preferences change
+
+Whenever a change is made to a property, a `PAPreferencesDidChangeNotification` notification is posted (with its object set to the PAPreferences subclass).
+
+## How It Works
+
+When a property is first accessed, that selector is mapped to a method that interacts with the NSUserDefaults class. For example, this line:
+
+```objective-c
+	hasSeenIntro = YES;
+```
+
+expands to a call to a method that behaves like this:
+
+```objective-c
+- (void)setHasSeenIntro:(BOOL)value {
+	[[NSUserDefaults standardUserDefaults] setBool:value forKey:@"hasSeenIntro"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
+}
+```
+
+## Changelog
+
+### 0.1 
+ *  Initial release
+
+## Contact
+
+To hear about updates to this and other libraries follow me on Twitter ([@denishennessy](http://twitter.com/denishennessy)) or App.net ([@denishennessy](http://alpha.app.net/denishennessy)).
+
+If you encounter a bug or just thought of a terrific new feature, then opening a github issue is probably the best way to share it. 
+Actually, the best way is to send me a pull request...
+
+For anything else, email always works: [denis@peerassembly.com](mailto:denis@peerassembly.com)
+
+## License
+
+```
+Copyright (c) 2014, Denis Hennessy (Peer Assembly - http://peerassembly.com)
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Peer Assembly, Denis Hennessy nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL PEER ASSEMBLY OR DENIS HENNESSY BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+

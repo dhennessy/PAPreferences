@@ -161,9 +161,10 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
                     NSLog(@"Retained properties are not supported by PAPreferences, use assign instead");
                 } else {
                     if ([self isValidType:type]) {
-                        NSLog(@"Type of %@ is not supported by PAPreferences", name);
                         _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:name type:type isSetter:NO];
                         _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:name type:type isSetter:YES];
+                    } else {
+                        NSLog(@"Type of %@ is not supported by PAPreferences", name);
                     }
                 }
             }
@@ -209,7 +210,6 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
 
 + (BOOL)resolveInstanceMethod:(SEL)sel {
     NSString *selectorString = NSStringFromSelector(sel);
-    NSLog(@"resolveInstanceMethod:%@", selectorString);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     if (propertyDescriptor) {
         IMP getter = 0;

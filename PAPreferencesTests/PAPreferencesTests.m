@@ -23,6 +23,7 @@
 @property (nonatomic, assign) NSURLConnection *connection;  // Invalid object type
 @property (nonatomic, retain) NSString *fruit;              // Invalid retain specifier
 @property (nonatomic, assign) NSString *title;
+@property (nonatomic, assign) NSDate *date;
 -(NSString *)nickname;
 @end
 
@@ -100,6 +101,13 @@
     NSData *data = [NSData dataWithBytes:"hello" length:5];
     prefs.data = data;
     XCTAssertEqualObjects(prefs.data, data);
+}
+
+- (void)testDateRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSDate *date = [NSDate date];
+    prefs.date = date;
+    XCTAssertEqualObjects(prefs.date, date);
 }
 
 - (void)testDictionaryPersistence {

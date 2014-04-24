@@ -22,6 +22,8 @@
 @property (nonatomic, assign) NSURL *site;
 @property (nonatomic, assign) NSURLConnection *connection;  // Invalid object type
 @property (nonatomic, retain) NSString *fruit;              // Invalid retain specifier
+@property (nonatomic, assign) NSString *title;
+-(NSString *)nickname;
 @end
 
 @implementation MyPreferences
@@ -37,6 +39,16 @@
 @dynamic site;
 @dynamic connection;
 @dynamic fruit;
+@dynamic title;
+-(NSString *)nickname {
+    return self.username;
+}
++(NSString *)transformKey:(NSString *)key {
+    if ([key isEqualToString:@"title"]) {
+        return @"KEY_TITLE";
+    }
+    return key;
+}
 @end
 
 @interface PAPreferencesTests : XCTestCase {
@@ -149,10 +161,28 @@
     XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:@"username"], @"alice");
 }
 
+- (void)testTransformKeyPersistencd {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    prefs.title = @"yesterday";
+    XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_TITLE"], @"yesterday");
+}
+
+- (void)testTransformKeyRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    [[NSUserDefaults standardUserDefaults] setObject:@"yesterday" forKey:@"KEY_TITLE"];
+    XCTAssertEqualObjects(prefs.title, @"yesterday");
+}
+
 - (void)testStringRetrieval {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     prefs.username = @"alice";
     XCTAssertEqualObjects(prefs.username, @"alice");
+}
+
+- (void)testAccessViaInstanceMethod {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    [[NSUserDefaults standardUserDefaults] setObject:@"bob" forKey:@"username"];
+    XCTAssertEqualObjects(prefs.nickname, @"bob");
 }
 
 - (void)testUrlPersistence {

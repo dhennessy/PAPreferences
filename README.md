@@ -89,6 +89,24 @@ expands to a call to a method that behaves like this:
 }
 ```
 
+## Samples
+
+The best examples of how to use the library are in the unit tests - `PAPreferencesTests.m`. However, there's a simple example preferences file also included in the iOS sample.
+
+## Troubleshooting
+If you define a property but then forget to add the `@dynamic` line to its implementation file, then everything will appear to work but in reality the compiler is creating an in-memory storage for the property (as if you'd used a `@synthesize` line. These properties won't get saved to NSUserDefaults. To protect against this, it's good practice to wrap your class declaration with:
+
+```objective-c
+#pragma clang diagnostic push
+#pragma clang diagnostic error "-Wobjc-missing-property-synthesis"
+```
+
+and
+
+```objective-c
+#pragma clang diagnostic pop
+```
+
 ## Changelog
 
 ### 0.1 

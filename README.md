@@ -109,6 +109,9 @@ and
 
 ## Changelog
 
+### 0.2
+ * Remove bogus warning for unsupported types
+ 
 ### 0.1 
  *  Initial release
 

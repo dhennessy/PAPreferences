@@ -89,8 +89,51 @@ expands to a call to a method that behaves like this:
 }
 ```
 
+## Setting Defaults
+
+I prefer to set defaults in code, rather than using the traditional NSUserDefaults method.  This is also a useful mechanism to set the first and last version installed for your app. Having these values lets you easily migrate existing users as you add new preferences. Here's an example from my Focus Time app:
+
+    - (id)init {
+        if (self = [super init]) {
+            NSString *version = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+            if (self.firstVersionInstalled == nil) {
+                self.firstVersionInstalled = version;
+            
+                // Set defaults for new users
+                self.pomodoroLength = 1500;
+                self.workStartSound = @"alert_gentle_jingle";
+                self.workEndSound = @"alert_ring";
+                // . . .
+            }
+        
+            self.lastVersionInstalled = version;
+        }
+        return self;
+    }
+
+## Samples
+
+The best examples of how to use the library are in the unit tests - `PAPreferencesTests.m`. However, there's a simple example preferences file also included in the iOS sample.
+
+## Troubleshooting
+If you define a property but then forget to add the `@dynamic` line to its implementation file, then everything will appear to work but in reality the compiler is creating an in-memory storage for the property (as if you'd used a `@synthesize` line. These properties won't get saved to NSUserDefaults. To protect against this, it's good practice to wrap your class declaration with:
+
+```objective-c
+#pragma clang diagnostic push
+#pragma clang diagnostic error "-Wobjc-missing-property-synthesis"
+```
+
+and
+
+```objective-c
+#pragma clang diagnostic pop
+```
+
 ## Changelog
 
+### 0.2
+ * Remove bogus warning for unsupported types
+ 
 ### 0.1 
  *  Initial release
 

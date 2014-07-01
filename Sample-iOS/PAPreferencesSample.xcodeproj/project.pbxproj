@@ -18,6 +18,9 @@
 		920B71EB17E798080074D2E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920B71D017E798080074D2E5 /* Foundation.framework */; };
 		920B71EC17E798080074D2E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920B71D417E798080074D2E5 /* UIKit.framework */; };
 		920B71F417E798080074D2E5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 920B71F217E798080074D2E5 /* InfoPlist.strings */; };
+		9220B485190FA354006432F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9220B482190FA354006432F4 /* Main.storyboard */; };
+		9220B486190FA354006432F4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220B484190FA354006432F4 /* ViewController.m */; };
+		9220B489190FA536006432F4 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 9220B488190FA536006432F4 /* Preferences.m */; };
 		928DC8A618EF487600D0AC26 /* PAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8A318EF487600D0AC26 /* PAPreferences.m */; };
 		928DC8A718EF487600D0AC26 /* PAPropertyDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8A518EF487600D0AC26 /* PAPropertyDescriptor.m */; };
 		928DC8F118EF498C00D0AC26 /* PAPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 928DC8EF18EF497A00D0AC26 /* PAPreferencesTests.m */; };
@@ -49,6 +52,11 @@
 		920B71E917E798080074D2E5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		920B71F117E798080074D2E5 /* PAPreferencesSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PAPreferencesSampleTests-Info.plist"; sourceTree = "<group>"; };
 		920B71F317E798080074D2E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9220B482190FA354006432F4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9220B483190FA354006432F4 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9220B484190FA354006432F4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9220B487190FA536006432F4 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		9220B488190FA536006432F4 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		928DC8A218EF487600D0AC26 /* PAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPreferences.h; path = ../../PAPreferences/PAPreferences.h; sourceTree = "<group>"; };
 		928DC8A318EF487600D0AC26 /* PAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPreferences.m; path = ../../PAPreferences/PAPreferences.m; sourceTree = "<group>"; };
 		928DC8A418EF487600D0AC26 /* PAPropertyDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPropertyDescriptor.h; path = ../../PAPreferences/PAPropertyDescriptor.h; sourceTree = "<group>"; };
@@ -116,6 +124,11 @@
 				928DC8A118EF47A200D0AC26 /* PAPreferences */,
 				920B71DF17E798080074D2E5 /* AppDelegate.h */,
 				920B71E017E798080074D2E5 /* AppDelegate.m */,
+				9220B482190FA354006432F4 /* Main.storyboard */,
+				9220B487190FA536006432F4 /* Preferences.h */,
+				9220B488190FA536006432F4 /* Preferences.m */,
+				9220B483190FA354006432F4 /* ViewController.h */,
+				9220B484190FA354006432F4 /* ViewController.m */,
 				920B71E217E798080074D2E5 /* Images.xcassets */,
 				920B71D717E798080074D2E5 /* Supporting Files */,
 			);
@@ -238,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9220B485190FA354006432F4 /* Main.storyboard in Resources */,
 				920B71DB17E798080074D2E5 /* InfoPlist.strings in Resources */,
 				920B71E317E798080074D2E5 /* Images.xcassets in Resources */,
 			);
@@ -260,8 +274,10 @@
 			files = (
 				920B71E117E798080074D2E5 /* AppDelegate.m in Sources */,
 				928DC8A718EF487600D0AC26 /* PAPropertyDescriptor.m in Sources */,
+				9220B489190FA536006432F4 /* Preferences.m in Sources */,
 				928DC8A618EF487600D0AC26 /* PAPreferences.m in Sources */,
 				920B71DD17E798080074D2E5 /* main.m in Sources */,
+				9220B486190FA354006432F4 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,15 +41,18 @@
 @dynamic connection;
 @dynamic fruit;
 @dynamic title;
--(NSString *)nickname {
+
+- (NSString *)nickname {
     return self.username;
 }
-+(NSString *)transformKey:(NSString *)key {
+
++ (NSString *)transformKey:(NSString *)key {
     if ([key isEqualToString:@"title"]) {
         return @"KEY_TITLE";
     }
     return key;
 }
+
 @end
 
 @interface PAPreferencesTests : XCTestCase {

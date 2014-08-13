@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "PAPreferences.h"
 
+NSString * const RemappedTitleKey = @"KEY_TITLE";
+
 @interface MyPreferences : PAPreferences
 @property (nonatomic, assign) NSString *username;
 @property (nonatomic, assign) NSArray *kids;
@@ -49,7 +51,7 @@
 
 + (NSString *)transformKey:(NSString *)key {
     if ([key isEqualToString:@"title"]) {
-        return @"KEY_TITLE";
+        return RemappedTitleKey;
     }
     return key;
 }
@@ -176,12 +178,12 @@
 - (void)testTransformKeyPersistencd {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     prefs.title = @"yesterday";
-    XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:@"KEY_TITLE"], @"yesterday");
+    XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:RemappedTitleKey], @"yesterday");
 }
 
 - (void)testTransformKeyRetrieval {
     MyPreferences *prefs = [MyPreferences sharedInstance];
-    [[NSUserDefaults standardUserDefaults] setObject:@"yesterday" forKey:@"KEY_TITLE"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"yesterday" forKey:RemappedTitleKey];
     XCTAssertEqualObjects(prefs.title, @"yesterday");
 }
 

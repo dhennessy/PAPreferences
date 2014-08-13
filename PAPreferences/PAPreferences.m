@@ -134,7 +134,7 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
     return _sharedInstance;
 }
 
-+ (NSString *)transformKey:(NSString *)key {
++ (NSString *)defaultsKeyForPropertyName:(NSString *)key {
     return key;
 }
 
@@ -172,9 +172,9 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
                     NSLog(@"Retained properties are not supported by PAPreferences, use assign instead");
                 } else {
                     if ([self isValidType:type]) {
-                        name = [[self class] transformKey:name];
-                        _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:name type:type isSetter:NO];
-                        _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:name type:type isSetter:YES];
+                        NSString *defaultsKey = [[self class] defaultsKeyForPropertyName:name];
+                        _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:NO];
+                        _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:YES];
                     } else {
                         NSLog(@"Type of %@ is not supported by PAPreferences", name);
                     }

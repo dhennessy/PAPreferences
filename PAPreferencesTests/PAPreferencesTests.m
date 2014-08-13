@@ -49,11 +49,11 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     return self.username;
 }
 
-+ (NSString *)transformKey:(NSString *)key {
-    if ([key isEqualToString:@"title"]) {
++ (NSString *)defaultsKeyForPropertyName:(NSString *)name {
+    if ([name isEqualToString:@"title"]) {
         return RemappedTitleKey;
     }
-    return key;
+    return name;
 }
 
 @end
@@ -175,13 +175,13 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:@"username"], @"alice");
 }
 
-- (void)testTransformKeyPersistencd {
+- (void)testDefaultsKeyForPropertyNamePersistence {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     prefs.title = @"yesterday";
     XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:RemappedTitleKey], @"yesterday");
 }
 
-- (void)testTransformKeyRetrieval {
+- (void)testDefaultsKeyForPropertyNameRetrieval {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     [[NSUserDefaults standardUserDefaults] setObject:@"yesterday" forKey:RemappedTitleKey];
     XCTAssertEqualObjects(prefs.title, @"yesterday");

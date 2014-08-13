@@ -69,6 +69,8 @@ PAPreferences supports the following property types:
  * float
  * double
 
+While you can set mutable values for the properties, you will currently get immutable copies back. Just like when using NSUserDefaults directly.
+
 ## Updating UI when Preferences change
 
 Whenever a change is made to a property, a `PAPreferencesDidChangeNotification` notification is posted (with its object set to the PAPreferences subclass).

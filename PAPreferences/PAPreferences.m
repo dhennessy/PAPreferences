@@ -288,7 +288,7 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
 - (BOOL)synchronize {
     BOOL result = [[NSUserDefaults standardUserDefaults] synchronize];
     if (!result) {
-        NSLog(@"Warning - Failed to synchronise user defaults, some data may be stale");
+        NSLog(@"Warning - Failed to synchronise user defaults, some of the data may be stale.");
     }
     return result;
 }

@@ -24,7 +24,8 @@
 @property (nonatomic, retain) NSString *fruit;              // Invalid retain specifier
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) NSDate *date;
--(NSString *)nickname;
+
+@property (nonatomic, readonly, assign) NSString *nickname;
 @end
 
 @implementation MyPreferences

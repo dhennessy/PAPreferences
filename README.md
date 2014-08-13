@@ -64,6 +64,7 @@ PAPreferences supports the following property types:
  * NSDictionary
  * NSURL
  * NSData
+ * NSDate
  * BOOL
  * float
  * double

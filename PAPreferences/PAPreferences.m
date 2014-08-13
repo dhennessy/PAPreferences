@@ -174,14 +174,14 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
             }
             if (isDynamic) {
                 if (shouldRetain) {
-                    NSLog(@"Retained properties are not supported by PAPreferences, use assign instead");
+                    NSLog(@"Retained properties are not supported by PAPreferences, use assign instead.");
                 } else {
                     if ([self isValidType:type]) {
                         NSString *defaultsKey = [[self class] defaultsKeyForPropertyName:name];
                         _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:NO];
                         _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:YES];
                     } else {
-                        NSLog(@"Type of %@ is not supported by PAPreferences", name);
+                        NSLog(@"Type of %@ is not supported by PAPreferences.", name);
                     }
                 }
             }

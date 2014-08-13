@@ -24,6 +24,7 @@ void paprefBoolSetter(id self, SEL _cmd, BOOL value) {
     NSString *selectorString = NSStringFromSelector(_cmd);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:propertyDescriptor.name];
+    [self synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -37,6 +38,7 @@ void paprefDoubleSetter(id self, SEL _cmd, double value) {
     NSString *selectorString = NSStringFromSelector(_cmd);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     [[NSUserDefaults standardUserDefaults] setDouble:value forKey:propertyDescriptor.name];
+    [self synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -50,6 +52,7 @@ void paprefFloatSetter(id self, SEL _cmd, float value) {
     NSString *selectorString = NSStringFromSelector(_cmd);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     [[NSUserDefaults standardUserDefaults] setFloat:value forKey:propertyDescriptor.name];
+    [self synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -63,6 +66,7 @@ void paprefIntegerSetter(id self, SEL _cmd, NSInteger value) {
     NSString *selectorString = NSStringFromSelector(_cmd);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     [[NSUserDefaults standardUserDefaults] setInteger:value forKey:propertyDescriptor.name];
+    [self synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -76,6 +80,7 @@ void paprefObjectSetter(id self, SEL _cmd, id value) {
     NSString *selectorString = NSStringFromSelector(_cmd);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:propertyDescriptor.name];
+    [self synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -89,6 +94,7 @@ void paprefURLSetter(id self, SEL _cmd, NSURL *value) {
     NSString *selectorString = NSStringFromSelector(_cmd);
     PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
     [[NSUserDefaults standardUserDefaults] setURL:value forKey:propertyDescriptor.name];
+    [self synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -295,7 +301,11 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
 }
 
 - (BOOL)synchronize {
-    return [[NSUserDefaults standardUserDefaults] synchronize];
+    BOOL result = [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!result) {
+        NSLog(@"Warning - Failed to synchronise user defaults, some of the data may be stale.");
+    }
+    return result;
 }
 
 @end

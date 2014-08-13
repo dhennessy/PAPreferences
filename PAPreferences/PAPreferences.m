@@ -116,6 +116,12 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
     return [[NSUserDefaults standardUserDefaults] stringForKey:propertyDescriptor.name];
 }
 
+NSDate *paprefDateGetter(id self, SEL _cmd) {
+    NSString *selectorString = NSStringFromSelector(_cmd);
+    PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[selectorString];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:propertyDescriptor.name];
+}
+
 @implementation PAPreferences
 
 + (instancetype)sharedInstance {
@@ -127,6 +133,11 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
     
     return _sharedInstance;
 }
+
++ (NSString *)defaultsKeyForPropertyName:(NSString *)key {
+    return key;
+}
+
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -161,8 +172,9 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
                     NSLog(@"Retained properties are not supported by PAPreferences, use assign instead");
                 } else {
                     if ([self isValidType:type]) {
-                        _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:name type:type isSetter:NO];
-                        _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:name type:type isSetter:YES];
+                        NSString *defaultsKey = [[self class] defaultsKeyForPropertyName:name];
+                        _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:NO];
+                        _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:YES];
                     } else {
                         NSLog(@"Type of %@ is not supported by PAPreferences", name);
                     }
@@ -198,6 +210,7 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
                 [type isEqualToString:@"@\"NSArray\""] ||
                 [type isEqualToString:@"@\"NSDictionary\""] ||
                 [type isEqualToString:@"@\"NSData\""] ||
+                [type isEqualToString:@"@\"NSDate\""] ||
                 [type isEqualToString:@"@\"NSURL\""]) {
                 return YES;
             }
@@ -245,6 +258,8 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
                     getter = (IMP)paprefDictionaryGetter;
                 } else if ([propertyDescriptor.type isEqualToString:@"@\"NSData\""]) {
                     getter = (IMP)paprefDataGetter;
+                } else if ([propertyDescriptor.type isEqualToString:@"@\"NSDate\""]) {
+                    getter = (IMP)paprefDateGetter;
                 } else if ([propertyDescriptor.type isEqualToString:@"@\"NSURL\""]) {
                     getter = (IMP)paprefURLGetter;
                     setter = (IMP)paprefURLSetter;

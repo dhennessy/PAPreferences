@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "PAPreferences.h"
 
+NSString * const RemappedTitleKey = @"KEY_TITLE";
+
 @interface MyPreferences : PAPreferences
 @property (nonatomic, assign) NSString *username;
 @property (nonatomic, assign) NSArray *kids;
@@ -22,6 +24,10 @@
 @property (nonatomic, assign) NSURL *site;
 @property (nonatomic, assign) NSURLConnection *connection;  // Invalid object type
 @property (nonatomic, retain) NSString *fruit;              // Invalid retain specifier
+@property (nonatomic, assign) NSString *title;
+@property (nonatomic, assign) NSDate *date;
+
+@property (nonatomic, readonly, assign) NSString *nickname;
 @end
 
 @implementation MyPreferences
@@ -37,6 +43,19 @@
 @dynamic site;
 @dynamic connection;
 @dynamic fruit;
+@dynamic title;
+
+- (NSString *)nickname {
+    return self.username;
+}
+
++ (NSString *)defaultsKeyForPropertyName:(NSString *)name {
+    if ([name isEqualToString:@"title"]) {
+        return RemappedTitleKey;
+    }
+    return name;
+}
+
 @end
 
 @interface PAPreferencesTests : XCTestCase {
@@ -88,6 +107,13 @@
     NSData *data = [NSData dataWithBytes:"hello" length:5];
     prefs.data = data;
     XCTAssertEqualObjects(prefs.data, data);
+}
+
+- (void)testDateRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSDate *date = [NSDate date];
+    prefs.date = date;
+    XCTAssertEqualObjects(prefs.date, date);
 }
 
 - (void)testDictionaryPersistence {
@@ -149,10 +175,28 @@
     XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:@"username"], @"alice");
 }
 
+- (void)testDefaultsKeyForPropertyNamePersistence {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    prefs.title = @"yesterday";
+    XCTAssertEqualObjects([[NSUserDefaults standardUserDefaults] objectForKey:RemappedTitleKey], @"yesterday");
+}
+
+- (void)testDefaultsKeyForPropertyNameRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    [[NSUserDefaults standardUserDefaults] setObject:@"yesterday" forKey:RemappedTitleKey];
+    XCTAssertEqualObjects(prefs.title, @"yesterday");
+}
+
 - (void)testStringRetrieval {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     prefs.username = @"alice";
     XCTAssertEqualObjects(prefs.username, @"alice");
+}
+
+- (void)testAccessViaInstanceMethod {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    [[NSUserDefaults standardUserDefaults] setObject:@"bob" forKey:@"username"];
+    XCTAssertEqualObjects(prefs.nickname, @"bob");
 }
 
 - (void)testUrlPersistence {

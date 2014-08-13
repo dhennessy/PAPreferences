@@ -17,5 +17,6 @@ extern NSString * const PAPreferencesDidChangeNotification;
 + (instancetype)sharedInstance;
 
 - (BOOL)synchronize;
++ (NSString *)defaultsKeyForPropertyName:(NSString *)key;
 
 @end

@@ -88,6 +88,7 @@
 				928DC8B218EF48D600D0AC26 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		928DC8B218EF48D600D0AC26 /* Products */ = {
 			isa = PBXGroup;

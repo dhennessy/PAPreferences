@@ -194,6 +194,20 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
     return self;
 }
 
+NS_INLINE NSString * classNameForTypeString(NSString *typeString) {
+    NSString *className = nil;
+    
+    if ([typeString hasPrefix:@"@\""] &&
+        [typeString hasSuffix:@"\""]) {
+        const NSUInteger prefixLength = 2;
+        const NSUInteger suffixLength = 1;
+        const NSUInteger classNameLength = typeString.length - suffixLength - prefixLength;
+        className = [typeString substringWithRange:NSMakeRange(prefixLength, classNameLength)];
+    }
+    
+    return className;
+}
+
 - (BOOL)isValidType:(NSString *)type {
     unichar typeIndicator = [type characterAtIndex:0];
     switch (typeIndicator) {
@@ -211,14 +225,17 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
             return YES;
             
         case _C_ID:
-            if ([type isEqualToString:@"@\"NSString\""] ||
-                [type isEqualToString:@"@\"NSArray\""] ||
-                [type isEqualToString:@"@\"NSDictionary\""] ||
-                [type isEqualToString:@"@\"NSData\""] ||
-                [type isEqualToString:@"@\"NSDate\""] ||
-                [type isEqualToString:@"@\"NSURL\""]) {
+        {
+            NSString *className = classNameForTypeString(type);
+            if ([className isEqualToString:@"NSString"] ||
+                [className isEqualToString:@"NSArray"] ||
+                [className isEqualToString:@"NSDictionary"] ||
+                [className isEqualToString:@"NSData"] ||
+                [className isEqualToString:@"NSDate"] ||
+                [className isEqualToString:@"NSURL"]) {
                 return YES;
             }
+        }
             
         default:
             return NO;
@@ -257,19 +274,22 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
             {
                 getter = (IMP)paprefObjectGetter;
                 setter = (IMP)paprefObjectSetter;
-                if ([typeString isEqualToString:@"@\"NSString\""]) {
-                    getter = (IMP)paprefStringGetter;
-                } else if ([typeString isEqualToString:@"@\"NSArray\""]) {
-                    getter = (IMP)paprefArrayGetter;
-                } else if ([typeString isEqualToString:@"@\"NSDictionary\""]) {
-                    getter = (IMP)paprefDictionaryGetter;
-                } else if ([typeString isEqualToString:@"@\"NSData\""]) {
-                    getter = (IMP)paprefDataGetter;
-                } else if ([typeString isEqualToString:@"@\"NSDate\""]) {
-                    getter = (IMP)paprefDateGetter;
-                } else if ([typeString isEqualToString:@"@\"NSURL\""]) {
-                    getter = (IMP)paprefURLGetter;
-                    setter = (IMP)paprefURLSetter;
+                NSString *className = classNameForTypeString(typeString);
+                if (className != nil) {
+                    if ([className isEqualToString:@"NSString"]) {
+                        getter = (IMP)paprefStringGetter;
+                    } else if ([className isEqualToString:@"NSArray"]) {
+                        getter = (IMP)paprefArrayGetter;
+                    } else if ([className isEqualToString:@"NSDictionary"]) {
+                        getter = (IMP)paprefDictionaryGetter;
+                    } else if ([className isEqualToString:@"NSData"]) {
+                        getter = (IMP)paprefDataGetter;
+                    } else if ([className isEqualToString:@"NSDate"]) {
+                        getter = (IMP)paprefDateGetter;
+                    } else if ([className isEqualToString:@"NSURL"]) {
+                        getter = (IMP)paprefURLGetter;
+                        setter = (IMP)paprefURLSetter;
+                    }
                 }
                 break;
             }

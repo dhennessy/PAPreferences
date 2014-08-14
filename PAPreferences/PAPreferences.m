@@ -232,7 +232,8 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
     if (propertyDescriptor) {
         IMP getter = 0;
         IMP setter = 0;
-        unichar typeIndicator = [propertyDescriptor.type characterAtIndex:0];
+        NSString *typeString = propertyDescriptor.type;
+        unichar typeIndicator = [typeString characterAtIndex:0];
         switch (typeIndicator) {
 #if __LP64__
             case _C_BOOL:
@@ -253,23 +254,25 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
                 break;
                 
             case _C_ID:
+            {
                 getter = (IMP)paprefObjectGetter;
                 setter = (IMP)paprefObjectSetter;
-                if ([propertyDescriptor.type isEqualToString:@"@\"NSString\""]) {
+                if ([typeString isEqualToString:@"@\"NSString\""]) {
                     getter = (IMP)paprefStringGetter;
-                } else if ([propertyDescriptor.type isEqualToString:@"@\"NSArray\""]) {
+                } else if ([typeString isEqualToString:@"@\"NSArray\""]) {
                     getter = (IMP)paprefArrayGetter;
-                } else if ([propertyDescriptor.type isEqualToString:@"@\"NSDictionary\""]) {
+                } else if ([typeString isEqualToString:@"@\"NSDictionary\""]) {
                     getter = (IMP)paprefDictionaryGetter;
-                } else if ([propertyDescriptor.type isEqualToString:@"@\"NSData\""]) {
+                } else if ([typeString isEqualToString:@"@\"NSData\""]) {
                     getter = (IMP)paprefDataGetter;
-                } else if ([propertyDescriptor.type isEqualToString:@"@\"NSDate\""]) {
+                } else if ([typeString isEqualToString:@"@\"NSDate\""]) {
                     getter = (IMP)paprefDateGetter;
-                } else if ([propertyDescriptor.type isEqualToString:@"@\"NSURL\""]) {
+                } else if ([typeString isEqualToString:@"@\"NSURL\""]) {
                     getter = (IMP)paprefURLGetter;
                     setter = (IMP)paprefURLSetter;
                 }
                 break;
+            }
                 
 #if __LP64__
             case _C_LNG_LNG:

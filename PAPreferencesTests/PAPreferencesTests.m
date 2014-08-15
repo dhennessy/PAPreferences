@@ -26,6 +26,7 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 @property (nonatomic, retain) NSString *fruit;              // Invalid retain specifier
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) NSDate *date;
+@property (nonatomic, assign) NSNumber *number;
 
 @property (nonatomic, readonly, assign) NSString *nickname;
 @end
@@ -44,6 +45,7 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 @dynamic connection;
 @dynamic fruit;
 @dynamic title;
+@dynamic number;
 
 - (NSString *)nickname {
     return self.username;
@@ -210,6 +212,22 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     prefs.site = [NSURL URLWithString:@"http://apple.com"];
     XCTAssertEqualObjects(prefs.site, [NSURL URLWithString:@"http://apple.com"]);
 }
+
+- (void)testCodableObjectPersistence {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSNumber *number = @(23);
+    prefs.number = number;
+    NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"number"];
+    XCTAssertEqualObjects([NSKeyedUnarchiver unarchiveObjectWithData:data], number);
+}
+
+- (void)testCodableObjectRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSNumber *number = @(23);
+    prefs.number = number;
+    XCTAssertEqualObjects(prefs.number, number);
+}
+
 
 - (void)testPropertyRemoval {
     MyPreferences *prefs = [MyPreferences sharedInstance];

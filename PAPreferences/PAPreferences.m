@@ -127,6 +127,17 @@ NSDate *paprefDateGetter(id self, SEL _cmd) {
     return [[NSUserDefaults standardUserDefaults] objectForKey:propertyDescriptorName];
 }
 
+id paprefCodableObjectGetter(id self, SEL _cmd) {
+    NSData *data = paprefDataGetter(self, _cmd);
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+}
+
+void paprefCodableObjectSetter(id self, SEL _cmd, id value) {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:value];
+    paprefObjectSetter(self, _cmd, data);
+}
+
+
 @implementation PAPreferences
 
 + (instancetype)sharedInstance {
@@ -234,6 +245,11 @@ NS_INLINE NSString * classNameForTypeString(NSString *typeString) {
                 [className isEqualToString:@"NSDate"] ||
                 [className isEqualToString:@"NSURL"]) {
                 return YES;
+            } else {
+                Class class = NSClassFromString(className);
+                if ([class conformsToProtocol:@protocol(NSCoding)]) {
+                    return YES;
+                }
             }
         }
             
@@ -289,6 +305,12 @@ NS_INLINE NSString * classNameForTypeString(NSString *typeString) {
                     } else if ([className isEqualToString:@"NSURL"]) {
                         getter = (IMP)paprefURLGetter;
                         setter = (IMP)paprefURLSetter;
+                    } else {
+                        Class class = NSClassFromString(className);
+                        if ([class conformsToProtocol:@protocol(NSCoding)]) {
+                            getter = (IMP)paprefCodableObjectGetter;
+                            setter = (IMP)paprefCodableObjectSetter;
+                        }
                     }
                 }
                 break;

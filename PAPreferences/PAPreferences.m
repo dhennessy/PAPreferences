@@ -24,7 +24,7 @@ NS_INLINE PAPropertyDescriptor * propertyDescriptorForSelector(SEL _cmd) {
 
 NS_INLINE NSString * defaultsKeyForSelector(SEL _cmd) {
     PAPropertyDescriptor *descriptor = propertyDescriptorForSelector(_cmd);
-    NSString *defaultsKey = descriptor.name;
+    NSString *defaultsKey = descriptor.defaultsKey;
     
     return defaultsKey;
 }
@@ -189,8 +189,8 @@ void paprefCodableObjectSetter(id self, SEL _cmd, id value) {
                 } else {
                     if ([self isValidType:type]) {
                         NSString *defaultsKey = [[self class] defaultsKeyForPropertyName:name];
-                        _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:NO];
-                        _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithName:defaultsKey type:type isSetter:YES];
+                        _dynamicProperties[getterName] = [[PAPropertyDescriptor alloc] initWithDefaultsKey:defaultsKey type:type isSetter:NO];
+                        _dynamicProperties[setterName] = [[PAPropertyDescriptor alloc] initWithDefaultsKey:defaultsKey type:type isSetter:YES];
                     } else {
                         NSLog(@"Type of %@ is not supported by PAPreferences.", name);
                     }

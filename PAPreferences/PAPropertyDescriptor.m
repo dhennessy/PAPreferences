@@ -10,9 +10,9 @@
 
 @implementation PAPropertyDescriptor
 
-- (id)initWithName:(NSString *)name type:(NSString *)type isSetter:(BOOL)isSetter {
+- (id)initWithDefaultsKey:(NSString *)defaultsKey type:(NSString *)type isSetter:(BOOL)isSetter {
     if (self = [super init]) {
-        _name = name;
+        _defaultsKey = defaultsKey;
         _type = type;
         _isSetter = isSetter;
     }

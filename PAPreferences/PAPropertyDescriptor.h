@@ -10,10 +10,10 @@
 
 @interface PAPropertyDescriptor : NSObject
 
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *defaultsKey;
 @property (nonatomic, readonly) BOOL isSetter;
 @property (nonatomic, readonly) NSString *type;
 
-- (id)initWithName:(NSString *)name type:(NSString *)type isSetter:(BOOL)isSetter;
+- (id)initWithDefaultsKey:(NSString *)defaultsKey type:(NSString *)type isSetter:(BOOL)isSetter;
 
 @end

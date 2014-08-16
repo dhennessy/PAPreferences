@@ -135,6 +135,13 @@ and
 
 ## Changelog
 
+### 0.3
+ * Added automatic synchronize call each time a property is updated (along with a flag to turn it off)
+ * Add support for NSDate and NSCoding
+ * Refactor getter & setter helper functions
+ 
+Thanks to @Janx2 and @creatd for pull requests.
+ 
 ### 0.2
  * Remove bogus warning for unsupported types
  

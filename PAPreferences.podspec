@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PAPreferences"
-  s.version      = "0.2"
+  s.version      = "0.3"
   s.summary      = "An easy way to store user preferences using NSUserDefaults."
 
   s.description  = <<-DESC

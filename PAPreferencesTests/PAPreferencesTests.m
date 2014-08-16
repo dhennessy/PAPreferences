@@ -282,6 +282,11 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)testAutoSynchronizeDefaultsOn {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    XCTAssertTrue(prefs.shouldAutomaticallySynchronize);
+}
+
 - (void)handleNotification:(NSNotification *)notification {
     _seenNotification = YES;
 }

@@ -14,6 +14,8 @@ extern NSString * const PAPreferencesDidChangeNotification;
     NSDictionary *_properties;
 }
 
+@property (nonatomic, assign) BOOL shouldAutomaticallySynchronize;
+
 + (instancetype)sharedInstance;
 
 - (BOOL)synchronize;

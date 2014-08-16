@@ -29,7 +29,6 @@ NS_INLINE NSString * defaultsKeyForSelector(SEL _cmd) {
     return defaultsKey;
 }
 
-
 BOOL paprefBoolGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     return [[NSUserDefaults standardUserDefaults] boolForKey:defaultsKey];
@@ -38,7 +37,9 @@ BOOL paprefBoolGetter(id self, SEL _cmd) {
 void paprefBoolSetter(id self, SEL _cmd, BOOL value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:defaultsKey];
-    [self synchronize];
+    if ([self shouldAutomaticallySynchronize]) {
+        [self synchronize];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -50,7 +51,9 @@ double paprefDoubleGetter(id self, SEL _cmd) {
 void paprefDoubleSetter(id self, SEL _cmd, double value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setDouble:value forKey:defaultsKey];
-    [self synchronize];
+    if ([self shouldAutomaticallySynchronize]) {
+        [self synchronize];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -62,7 +65,9 @@ float paprefFloatGetter(id self, SEL _cmd) {
 void paprefFloatSetter(id self, SEL _cmd, float value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setFloat:value forKey:defaultsKey];
-    [self synchronize];
+    if ([self shouldAutomaticallySynchronize]) {
+        [self synchronize];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -74,7 +79,9 @@ NSInteger paprefIntegerGetter(id self, SEL _cmd) {
 void paprefIntegerSetter(id self, SEL _cmd, NSInteger value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setInteger:value forKey:defaultsKey];
-    [self synchronize];
+    if ([self shouldAutomaticallySynchronize]) {
+        [self synchronize];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -86,7 +93,9 @@ id paprefObjectGetter(id self, SEL _cmd) {
 void paprefObjectSetter(id self, SEL _cmd, id value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:defaultsKey];
-    [self synchronize];
+    if ([self shouldAutomaticallySynchronize]) {
+        [self synchronize];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -98,7 +107,9 @@ NSURL *paprefURLGetter(id self, SEL _cmd) {
 void paprefURLSetter(id self, SEL _cmd, NSURL *value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setURL:value forKey:defaultsKey];
-    [self synchronize];
+    if ([self shouldAutomaticallySynchronize]) {
+        [self synchronize];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
 }
 
@@ -157,6 +168,7 @@ void paprefCodableObjectSetter(id self, SEL _cmd, id value) {
 
 - (instancetype)init {
     if (self = [super init]) {
+        _shouldAutomaticallySynchronize = YES;
         _dynamicProperties = [[NSMutableDictionary alloc] init];
         unsigned int cProps;
         objc_property_t *properties = class_copyPropertyList([self class], &cProps);

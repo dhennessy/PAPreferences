@@ -68,6 +68,7 @@ PAPreferences supports the following property types:
  * BOOL
  * float
  * double
+ * Classes conforming to the NSCoding protocol (including NSSecureCoding).
 
 While you can set mutable values for the properties, you will currently get immutable copies back. Just like when using NSUserDefaults directly.
 

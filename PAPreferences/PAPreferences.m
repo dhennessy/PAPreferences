@@ -91,6 +91,15 @@ id paprefObjectGetter(id self, SEL _cmd) {
 }
 
 void paprefObjectSetter(id self, SEL _cmd, id value) {
+#if DEBUG
+    if ((value != nil) &&
+        ![NSPropertyListSerialization propertyList:value
+                                  isValidForFormat:NSPropertyListBinaryFormat_v1_0]) {
+        // The specific format above is not particularly important.
+		[NSException raise:NSInvalidArgumentException
+					format:@"This object is not a valid plist: \n%@.", value];
+    }
+#endif
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {

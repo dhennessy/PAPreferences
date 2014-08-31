@@ -291,4 +291,12 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     _seenNotification = YES;
 }
 
+#if DEBUG
+- (void)testInvalidPropertyListPersistence {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSValue *value = [NSValue valueWithRange:NSMakeRange(0, 1)];
+    XCTAssertThrowsSpecificNamed(prefs.address = @{@"dictKey": value}, NSException, NSInvalidArgumentException);
+}
+#endif
+
 @end

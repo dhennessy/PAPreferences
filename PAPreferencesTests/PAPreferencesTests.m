@@ -203,6 +203,21 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     XCTAssertEqualObjects(prefs.nickname, @"bob");
 }
 
+- (void)testNumberPersistence {
+     MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSNumber *number = @(23);
+    prefs.number = number;
+    NSNumber *defaultsNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"number"];
+    XCTAssertEqualObjects(defaultsNumber, number);
+ }
+
+- (void)testNumberRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSNumber *number = @(23);
+    prefs.number = number;
+    XCTAssertEqualObjects(prefs.number, number);
+}
+
 - (void)testUrlPersistence {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     prefs.site = [NSURL URLWithString:@"http://apple.com"];

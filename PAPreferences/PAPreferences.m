@@ -91,6 +91,15 @@ id paprefObjectGetter(id self, SEL _cmd) {
 }
 
 void paprefObjectSetter(id self, SEL _cmd, id value) {
+#if DEBUG
+    if ((value != nil) &&
+        ![NSPropertyListSerialization propertyList:value
+                                  isValidForFormat:NSPropertyListBinaryFormat_v1_0]) {
+        // The specific format above is not particularly important.
+		[NSException raise:NSInvalidArgumentException
+					format:@"This object is not a valid plist: \n%@.", value];
+    }
+#endif
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
@@ -134,6 +143,11 @@ NSString *paprefStringGetter(id self, SEL _cmd) {
 }
 
 NSDate *paprefDateGetter(id self, SEL _cmd) {
+    NSString *propertyDescriptorName = defaultsKeyForSelector(_cmd);
+    return [[NSUserDefaults standardUserDefaults] objectForKey:propertyDescriptorName];
+}
+
+NSNumber *paprefNumberGetter(id self, SEL _cmd) {
     NSString *propertyDescriptorName = defaultsKeyForSelector(_cmd);
     return [[NSUserDefaults standardUserDefaults] objectForKey:propertyDescriptorName];
 }
@@ -255,6 +269,7 @@ NS_INLINE NSString * classNameForTypeString(NSString *typeString) {
                 [className isEqualToString:@"NSDictionary"] ||
                 [className isEqualToString:@"NSData"] ||
                 [className isEqualToString:@"NSDate"] ||
+                [className isEqualToString:@"NSNumber"] ||
                 [className isEqualToString:@"NSURL"]) {
                 return YES;
             } else {
@@ -314,6 +329,8 @@ NS_INLINE NSString * classNameForTypeString(NSString *typeString) {
                         getter = (IMP)paprefDataGetter;
                     } else if ([className isEqualToString:@"NSDate"]) {
                         getter = (IMP)paprefDateGetter;
+                    } else if ([className isEqualToString:@"NSNumber"]) {
+                        getter = (IMP)paprefNumberGetter;
                     } else if ([className isEqualToString:@"NSURL"]) {
                         getter = (IMP)paprefURLGetter;
                         setter = (IMP)paprefURLSetter;

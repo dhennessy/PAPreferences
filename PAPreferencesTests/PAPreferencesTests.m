@@ -27,6 +27,7 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) NSDate *date;
 @property (nonatomic, assign) NSNumber *number;
+@property (nonatomic, assign) NSValue *value;
 
 @property (nonatomic, readonly, assign) NSString *nickname;
 @end
@@ -46,6 +47,7 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 @dynamic fruit;
 @dynamic title;
 @dynamic number;
+@dynamic value;
 
 - (NSString *)nickname {
     return self.username;
@@ -201,6 +203,21 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     XCTAssertEqualObjects(prefs.nickname, @"bob");
 }
 
+- (void)testNumberPersistence {
+     MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSNumber *number = @(23);
+    prefs.number = number;
+    NSNumber *defaultsNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"number"];
+    XCTAssertEqualObjects(defaultsNumber, number);
+ }
+
+- (void)testNumberRetrieval {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSNumber *number = @(23);
+    prefs.number = number;
+    XCTAssertEqualObjects(prefs.number, number);
+}
+
 - (void)testUrlPersistence {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     prefs.site = [NSURL URLWithString:@"http://apple.com"];
@@ -215,17 +232,17 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 
 - (void)testCodableObjectPersistence {
     MyPreferences *prefs = [MyPreferences sharedInstance];
-    NSNumber *number = @(23);
-    prefs.number = number;
-    NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"number"];
-    XCTAssertEqualObjects([NSKeyedUnarchiver unarchiveObjectWithData:data], number);
+    NSValue *value = [NSValue valueWithRange:NSMakeRange(0, 1)];
+    prefs.value = value;
+    NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"value"];
+    XCTAssertEqualObjects([NSKeyedUnarchiver unarchiveObjectWithData:data], value);
 }
 
 - (void)testCodableObjectRetrieval {
     MyPreferences *prefs = [MyPreferences sharedInstance];
-    NSNumber *number = @(23);
-    prefs.number = number;
-    XCTAssertEqualObjects(prefs.number, number);
+    NSValue *value = [NSValue valueWithRange:NSMakeRange(0, 1)];
+    prefs.value = value;
+    XCTAssertEqualObjects(prefs.value, value);
 }
 
 
@@ -290,5 +307,13 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 - (void)handleNotification:(NSNotification *)notification {
     _seenNotification = YES;
 }
+
+#if DEBUG
+- (void)testInvalidPropertyListPersistence {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    NSValue *value = [NSValue valueWithRange:NSMakeRange(0, 1)];
+    XCTAssertThrowsSpecificNamed(prefs.address = @{@"dictKey": value}, NSException, NSInvalidArgumentException);
+}
+#endif
 
 @end

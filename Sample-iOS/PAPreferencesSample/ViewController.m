@@ -11,23 +11,11 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 
 @end
 
 @implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    if (![Preferences sharedInstance].hasSeenIntro) {
-        [Preferences sharedInstance].hasSeenIntro = YES;
-    } else {
-        _welcomeLabel.hidden = YES;
-    }
-    [self configureMessage];
-}
 
 - (IBAction)buttonTapped:(id)sender {
     [Preferences sharedInstance].pressCount = [Preferences sharedInstance].pressCount + 1;
@@ -35,6 +23,7 @@
 }
 
 - (void)configureMessage {
+    _progressLabel.hidden = NO;
     _progressLabel.text = [NSString stringWithFormat:@"Button has been pressed %ld times", (long)[Preferences sharedInstance].pressCount];
 }
 

@@ -16,9 +16,10 @@ extern NSString * const PAPreferencesDidChangeNotification;
 
 @property (nonatomic, assign) BOOL shouldAutomaticallySynchronize;
 
++ (NSString *)defaultsKeyForPropertyName:(NSString *)key;
 + (instancetype)sharedInstance;
 
 - (BOOL)synchronize;
-+ (NSString *)defaultsKeyForPropertyName:(NSString *)key;
+- (NSUserDefaults *)userDefaults;
 
 @end

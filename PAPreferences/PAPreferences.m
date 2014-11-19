@@ -31,12 +31,12 @@ NS_INLINE NSString * defaultsKeyForSelector(SEL _cmd) {
 
 BOOL paprefBoolGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] boolForKey:defaultsKey];
+    return [[self userDefaults] boolForKey:defaultsKey];
 }
 
 void paprefBoolSetter(id self, SEL _cmd, BOOL value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    [[NSUserDefaults standardUserDefaults] setBool:value forKey:defaultsKey];
+    [[self userDefaults] setBool:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
@@ -45,12 +45,12 @@ void paprefBoolSetter(id self, SEL _cmd, BOOL value) {
 
 double paprefDoubleGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] doubleForKey:defaultsKey];
+    return [[self userDefaults] doubleForKey:defaultsKey];
 }
 
 void paprefDoubleSetter(id self, SEL _cmd, double value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    [[NSUserDefaults standardUserDefaults] setDouble:value forKey:defaultsKey];
+    [[self userDefaults] setDouble:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
@@ -59,12 +59,12 @@ void paprefDoubleSetter(id self, SEL _cmd, double value) {
 
 float paprefFloatGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] floatForKey:defaultsKey];
+    return [[self userDefaults] floatForKey:defaultsKey];
 }
 
 void paprefFloatSetter(id self, SEL _cmd, float value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    [[NSUserDefaults standardUserDefaults] setFloat:value forKey:defaultsKey];
+    [[self userDefaults] setFloat:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
@@ -73,12 +73,12 @@ void paprefFloatSetter(id self, SEL _cmd, float value) {
 
 NSInteger paprefIntegerGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] integerForKey:defaultsKey];
+    return [[self userDefaults] integerForKey:defaultsKey];
 }
 
 void paprefIntegerSetter(id self, SEL _cmd, NSInteger value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:defaultsKey];
+    [[self userDefaults] setInteger:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
@@ -87,7 +87,7 @@ void paprefIntegerSetter(id self, SEL _cmd, NSInteger value) {
 
 id paprefObjectGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] objectForKey:defaultsKey];
+    return [[self userDefaults] objectForKey:defaultsKey];
 }
 
 void paprefObjectSetter(id self, SEL _cmd, id value) {
@@ -101,7 +101,7 @@ void paprefObjectSetter(id self, SEL _cmd, id value) {
     }
 #endif
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    [[NSUserDefaults standardUserDefaults] setObject:value forKey:defaultsKey];
+    [[self userDefaults] setObject:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
@@ -110,12 +110,12 @@ void paprefObjectSetter(id self, SEL _cmd, id value) {
 
 NSURL *paprefURLGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] URLForKey:defaultsKey];
+    return [[self userDefaults] URLForKey:defaultsKey];
 }
 
 void paprefURLSetter(id self, SEL _cmd, NSURL *value) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    [[NSUserDefaults standardUserDefaults] setURL:value forKey:defaultsKey];
+    [[self userDefaults] setURL:value forKey:defaultsKey];
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
@@ -124,32 +124,32 @@ void paprefURLSetter(id self, SEL _cmd, NSURL *value) {
 
 NSArray *paprefArrayGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] arrayForKey:defaultsKey];
+    return [[self userDefaults] arrayForKey:defaultsKey];
 }
 
 NSDictionary *paprefDictionaryGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] dictionaryForKey:defaultsKey];
+    return [[self userDefaults] dictionaryForKey:defaultsKey];
 }
 
 NSData *paprefDataGetter(id self, SEL _cmd) {
     NSString *defaultsKey = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] dataForKey:defaultsKey];
+    return [[self userDefaults] dataForKey:defaultsKey];
 }
 
 NSString *paprefStringGetter(id self, SEL _cmd) {
     NSString *propertyDescriptorName = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] stringForKey:propertyDescriptorName];
+    return [[self userDefaults] stringForKey:propertyDescriptorName];
 }
 
 NSDate *paprefDateGetter(id self, SEL _cmd) {
     NSString *propertyDescriptorName = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] objectForKey:propertyDescriptorName];
+    return [[self userDefaults] objectForKey:propertyDescriptorName];
 }
 
 NSNumber *paprefNumberGetter(id self, SEL _cmd) {
     NSString *propertyDescriptorName = defaultsKeyForSelector(_cmd);
-    return [[NSUserDefaults standardUserDefaults] objectForKey:propertyDescriptorName];
+    return [[self userDefaults] objectForKey:propertyDescriptorName];
 }
 
 id paprefCodableObjectGetter(id self, SEL _cmd) {
@@ -374,11 +374,15 @@ NS_INLINE NSString * classNameForTypeString(NSString *typeString) {
 }
 
 - (BOOL)synchronize {
-    BOOL result = [[NSUserDefaults standardUserDefaults] synchronize];
+    BOOL result = [[self userDefaults] synchronize];
     if (!result) {
         NSLog(@"Warning - Failed to synchronise user defaults, some of the data may be stale.");
     }
     return result;
+}
+
+- (NSUserDefaults *)userDefaults {
+    return [NSUserDefaults standardUserDefaults];
 }
 
 @end

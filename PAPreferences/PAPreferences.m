@@ -189,7 +189,7 @@ void paprefCodableObjectSetter(id self, SEL _cmd, id value) {
         for (int i=0; i<cProps; i++) {
             objc_property_t property = properties[i];
             NSString *name = [NSString stringWithUTF8String:property_getName(property)];
-            NSString *getterName = name;
+            NSString *getterName = [name copy];
             NSString *setterName = [NSString stringWithFormat:@"set%@%@:", [[name substringToIndex:1] capitalizedString], [name substringFromIndex:1]];
             NSString *type = nil;
             BOOL isDynamic = NO;

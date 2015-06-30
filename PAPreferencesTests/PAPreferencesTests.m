@@ -64,6 +64,7 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 
 @interface PAPreferencesTests : XCTestCase {
     BOOL _seenNotification;
+    NSString *_notificationChangedProperty;
 }
 
 @end
@@ -299,6 +300,15 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)testNotificationUserInfo {
+    _notificationChangedProperty = nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:PAPreferencesDidChangeNotification object:nil];
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    prefs.username = @"jack";
+    XCTAssertTrue([_notificationChangedProperty isEqualToString:@"username"]);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)testAutoSynchronizeDefaultsOn {
     MyPreferences *prefs = [MyPreferences sharedInstance];
     XCTAssertTrue(prefs.shouldAutomaticallySynchronize);
@@ -306,6 +316,7 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 
 - (void)handleNotification:(NSNotification *)notification {
     _seenNotification = YES;
+    _notificationChangedProperty = notification.userInfo[PAPreferencesChangedPropertyKey];
 }
 
 #if DEBUG

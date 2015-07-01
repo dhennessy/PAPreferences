@@ -11,6 +11,7 @@
 #include <objc/runtime.h>
 
 NSString * const PAPreferencesDidChangeNotification = @"PAPreferencesDidChangeNotification";
+NSString * const PAPreferencesChangedPropertyKey = @"PAPreferencesChangedPropertyKey";
 
 static NSMutableDictionary *_dynamicProperties;
 
@@ -40,7 +41,8 @@ void paprefBoolSetter(id self, SEL _cmd, BOOL value) {
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
+    NSDictionary *userInfo = @{PAPreferencesChangedPropertyKey: defaultsKey};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self userInfo:userInfo];
 }
 
 double paprefDoubleGetter(id self, SEL _cmd) {
@@ -54,7 +56,8 @@ void paprefDoubleSetter(id self, SEL _cmd, double value) {
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
+    NSDictionary *userInfo = @{PAPreferencesChangedPropertyKey: defaultsKey};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self userInfo:userInfo];
 }
 
 float paprefFloatGetter(id self, SEL _cmd) {
@@ -68,7 +71,8 @@ void paprefFloatSetter(id self, SEL _cmd, float value) {
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
+    NSDictionary *userInfo = @{PAPreferencesChangedPropertyKey: defaultsKey};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self userInfo:userInfo];
 }
 
 NSInteger paprefIntegerGetter(id self, SEL _cmd) {
@@ -82,7 +86,8 @@ void paprefIntegerSetter(id self, SEL _cmd, NSInteger value) {
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
+    NSDictionary *userInfo = @{PAPreferencesChangedPropertyKey: defaultsKey};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self userInfo:userInfo];
 }
 
 id paprefObjectGetter(id self, SEL _cmd) {
@@ -105,7 +110,8 @@ void paprefObjectSetter(id self, SEL _cmd, id value) {
     if ([self shouldAutomaticallySynchronize]) {
         [self synchronize];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self];
+    NSDictionary *userInfo = @{PAPreferencesChangedPropertyKey: defaultsKey};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAPreferencesDidChangeNotification object:self userInfo:userInfo];
 }
 
 NSURL *paprefURLGetter(id self, SEL _cmd) {

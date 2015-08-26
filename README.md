@@ -153,6 +153,10 @@ and
 
 ## Changelog
 
+### 0.5
+* Add the defaults keys to a userInfo dictionary that is passed to NSNotification when a property changes (thanks Jacob Rhoda)
+* Fix obscure crash in optimized code build (thanks YuanMing.Zhang)
+
 ### 0.4
  * Add ability to specify an instance of NSUserDefaults other than the standard one. This is important if you're sharing settings with an Extension on iOS
  * Fix iOS sample so that unit tests could run on both iOS and OSX (previously, the tests failed on iOS because the initial view controller accessed the singleton before the test ran).

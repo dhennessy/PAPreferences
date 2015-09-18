@@ -159,8 +159,12 @@ NSNumber *paprefNumberGetter(id self, SEL _cmd) {
 }
 
 id paprefCodableObjectGetter(id self, SEL _cmd) {
+    id object = nil;
     NSData *data = paprefDataGetter(self, _cmd);
-    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (data) {
+        object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return object;
 }
 
 void paprefCodableObjectSetter(id self, SEL _cmd, id value) {

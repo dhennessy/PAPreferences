@@ -515,7 +515,7 @@ static void * const PrivateKVOContext = (void*)&PrivateKVOContext;
             XCTAssertEqualObjects(oldValue, nil);
             XCTAssertEqualObjects(newValue, @"alice");
         } else if ([keyPath isEqualToString:@"site"]) {
-            XCTAssertEqualObjects(newValue, [NSURL URLWithString:@"http://google.com"]);
+            XCTAssertEqualObjects(oldValue, [NSURL URLWithString:@"http://google.com"]);
             XCTAssertEqualObjects(newValue, [NSURL URLWithString:@"http://apple.com"]);
         } else if ([keyPath isEqualToString:@"value"]) {
             XCTAssertEqualObjects(oldValue, [NSValue valueWithRange:NSMakeRange(0, 1)]);

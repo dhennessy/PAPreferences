@@ -193,14 +193,14 @@ void paprefCodableObjectSetter(id self, SEL _cmd, id value) {
 // value for key is set in NSUserDefaults directly.
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
 {
-	NSSet *result = [super keyPathsForValuesAffectingValueForKey:key];
-	
-	PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[key];
-	NSString *defaultsKey = [self defaultsKeyForPropertyName:key];
-	if (!propertyDescriptor || !defaultsKey) return result;
-	
-	NSString *keyPath = [NSString stringWithFormat:@"userDefaults.%@", defaultsKey];
-	return [result setByAddingObject:keyPath];
+    NSSet *result = [super keyPathsForValuesAffectingValueForKey:key];
+    
+    PAPropertyDescriptor *propertyDescriptor = _dynamicProperties[key];
+    NSString *defaultsKey = [self defaultsKeyForPropertyName:key];
+    if (!propertyDescriptor || !defaultsKey)  return result;
+    
+    NSString *keyPath = [NSString stringWithFormat:@"userDefaults.%@", defaultsKey];
+    return [result setByAddingObject:keyPath];
 }
 
 - (instancetype)init {

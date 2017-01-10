@@ -156,6 +156,9 @@ and
 ### 0.5
 * Add the defaults keys to a userInfo dictionary that is passed to NSNotification when a property changes (thanks Jacob Rhoda)
 * Fix obscure crash in optimized code build (thanks YuanMing.Zhang)
+* When Code Generation Optimization Level is set in the Xcode project and the user also defines a custom getter selector name for the PAPreferences subclass's property, it will crash!!! This is because when the getter name is assigned a new value, the name will release immediately due to the code optimization.
+ 
+Thanks to @zyuanming and @jadar for pull requests.
 
 ### 0.4
  * Add ability to specify an instance of NSUserDefaults other than the standard one. This is important if you're sharing settings with an Extension on iOS

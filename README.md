@@ -77,6 +77,8 @@ While you can set mutable values for the properties, you will currently get immu
 
 Whenever a change is made to a property, a `PAPreferencesDidChangeNotification` notification is posted (with its object set to the PAPreferences subclass).
 
+The class is Key-Value-Coding compliant, so you can register as an observer for an individual property, and be notified when it changes using the standard KVO mechanism. 
+
 ## How It Works
 
 When a property is first accessed, that selector is mapped to a method that interacts with the NSUserDefaults class. For example, this line:

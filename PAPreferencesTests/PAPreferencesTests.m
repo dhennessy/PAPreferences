@@ -62,6 +62,8 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 
 @end
 
+static void * const PrivateKVOContext = (void*)&PrivateKVOContext;
+
 @interface PAPreferencesTests : XCTestCase {
     BOOL _seenNotification;
     NSString *_notificationChangedProperty;
@@ -205,12 +207,12 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
 }
 
 - (void)testNumberPersistence {
-     MyPreferences *prefs = [MyPreferences sharedInstance];
+    MyPreferences *prefs = [MyPreferences sharedInstance];
     NSNumber *number = @(23);
     prefs.number = number;
     NSNumber *defaultsNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"number"];
     XCTAssertEqualObjects(defaultsNumber, number);
- }
+}
 
 - (void)testNumberRetrieval {
     MyPreferences *prefs = [MyPreferences sharedInstance];
@@ -326,5 +328,202 @@ NSString * const RemappedTitleKey = @"KEY_TITLE";
     XCTAssertThrowsSpecificNamed(prefs.address = @{@"dictKey": value}, NSException, NSInvalidArgumentException);
 }
 #endif
+
+#pragma mark - KVO
+
+- (void)testObserveArrayValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.kids = @[@"tom", @"jerry"];
+    
+    [prefs addObserver:self
+            forKeyPath:@"kids"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.kids = @[@"jack", @"jill"];
+}
+
+- (void)testObserveBoolValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    prefs.isOK = NO;
+    
+    [prefs addObserver:self
+            forKeyPath:@"isOK"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.isOK = YES;
+}
+
+- (void)testObserveDataValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    prefs.isOK = NO;
+    
+    [prefs addObserver:self
+            forKeyPath:@"data"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.data = [NSData dataWithBytes:"hello" length:5];
+}
+
+- (void)testObserveDictionaryValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.address = @{@"street": @"Main St", @"city": @"Disneyland"};
+    
+    [prefs addObserver:self
+            forKeyPath:@"address"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.address = @{@"street": @"Main St", @"city": @"Venice"};
+}
+
+- (void)testObserveDoubleValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.tilt = 0.00000041;
+    
+    [prefs addObserver:self
+            forKeyPath:@"tilt"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.tilt = 0.00000042;
+}
+
+- (void)testObserveFloatValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.height = 4.1;
+    
+    [prefs addObserver:self
+            forKeyPath:@"height"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.height = 4.2;
+}
+
+- (void)testObserveIntegerValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.age = 41;
+    
+    [prefs addObserver:self
+            forKeyPath:@"age"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.age = 42;
+}
+
+- (void)testObserveStringValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.username = @"alice";
+    
+    [prefs addObserver:self
+            forKeyPath:@"username"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.username = @"bob";
+}
+
+- (void)testObserveNumberValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.number = @1;
+    
+    [prefs addObserver:self
+            forKeyPath:@"number"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.number = @2;
+}
+
+- (void)testObserveURLValue {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.site = [NSURL URLWithString:@"http://google.com"];
+    
+    [prefs addObserver:self
+            forKeyPath:@"site"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.site = [NSURL URLWithString:@"http://apple.com"];
+}
+
+- (void)testObserveCodableObject {
+    MyPreferences *prefs = [MyPreferences sharedInstance];
+    
+    prefs.value = [NSValue valueWithRange:NSMakeRange(0, 1)];
+    
+    [prefs addObserver:self
+            forKeyPath:@"value"
+               options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+               context:PrivateKVOContext];
+    
+    prefs.value = [NSValue valueWithRange:NSMakeRange(0, 2)];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    if (context == PrivateKVOContext) {
+        id oldValue = change[NSKeyValueChangeOldKey];
+        id newValue = change[NSKeyValueChangeNewKey];
+        
+        if ([keyPath isEqualToString:@"kids"]) {
+            XCTAssertEqualObjects(oldValue[0], @"tom");
+            XCTAssertEqualObjects(oldValue[1], @"jerry");
+            XCTAssertEqualObjects(newValue[0], @"jack");
+            XCTAssertEqualObjects(newValue[1], @"jill");
+        } else if ([keyPath isEqualToString:@"data"]) {
+            XCTAssertEqualObjects(newValue, [NSData dataWithBytes:"hello" length:5]);
+        } else if ([keyPath isEqualToString:@"username"]) {
+            XCTAssertEqualObjects(oldValue, @"alice");
+            XCTAssertEqualObjects(newValue, @"bob");
+        } else if ([keyPath isEqualToString:@"isOK"]) {
+            XCTAssertFalse([oldValue boolValue]);
+            XCTAssertTrue([newValue boolValue]);
+        } else if ([keyPath isEqualToString:@"number"]) {
+            XCTAssertEqualObjects(oldValue, @1);
+            XCTAssertEqualObjects(newValue, @2);
+        } else if ([keyPath isEqualToString:@"address"]) {
+            XCTAssertEqualObjects(oldValue[@"street"], @"Main St");
+            XCTAssertEqualObjects(oldValue[@"city"], @"Disneyland");
+            XCTAssertEqualObjects(newValue[@"street"], @"Main St");
+            XCTAssertEqualObjects(newValue[@"city"], @"Venice");
+        } else if ([keyPath isEqualToString:@"tilt"]) {
+            XCTAssertEqualWithAccuracy([oldValue doubleValue], 0.00000041, DBL_EPSILON);
+            XCTAssertEqualWithAccuracy([newValue doubleValue], 0.00000042, DBL_EPSILON);
+        } else if ([keyPath isEqualToString:@"height"]) {
+            XCTAssertEqualWithAccuracy([oldValue floatValue], 4.1f, FLT_EPSILON);
+            XCTAssertEqualWithAccuracy([newValue floatValue], 4.2f, FLT_EPSILON);
+        } else if ([keyPath isEqualToString:@"age"]) {
+            XCTAssertEqual([oldValue integerValue], 41);
+            XCTAssertEqual([newValue integerValue], 42);
+        } else if ([keyPath isEqualToString:@"username"]) {
+            XCTAssertEqualObjects(oldValue, nil);
+            XCTAssertEqualObjects(newValue, @"alice");
+        } else if ([keyPath isEqualToString:@"site"]) {
+            XCTAssertEqualObjects(oldValue, [NSURL URLWithString:@"http://google.com"]);
+            XCTAssertEqualObjects(newValue, [NSURL URLWithString:@"http://apple.com"]);
+        } else if ([keyPath isEqualToString:@"value"]) {
+            XCTAssertEqualObjects(oldValue, [NSValue valueWithRange:NSMakeRange(0, 1)]);
+            XCTAssertEqualObjects(newValue, [NSValue valueWithRange:NSMakeRange(0, 2)]);
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 @end

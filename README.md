@@ -77,6 +77,8 @@ While you can set mutable values for the properties, you will currently get immu
 
 Whenever a change is made to a property, a `PAPreferencesDidChangeNotification` notification is posted (with its object set to the PAPreferences subclass).
 
+The class is Key-Value-Coding compliant, so you can register as an observer for an individual property, and be notified when it changes using the standard KVO mechanism. 
+
 ## How It Works
 
 When a property is first accessed, that selector is mapped to a method that interacts with the NSUserDefaults class. For example, this line:
@@ -156,6 +158,9 @@ and
 ### 0.5
 * Add the defaults keys to a userInfo dictionary that is passed to NSNotification when a property changes (thanks Jacob Rhoda)
 * Fix obscure crash in optimized code build (thanks YuanMing.Zhang)
+* When Code Generation Optimization Level is set in the Xcode project and the user also defines a custom getter selector name for the PAPreferences subclass's property, it will crash!!! This is because when the getter name is assigned a new value, the name will release immediately due to the code optimization.
+ 
+Thanks to @zyuanming and @jadar for pull requests.
 
 ### 0.4
  * Add ability to specify an instance of NSUserDefaults other than the standard one. This is important if you're sharing settings with an Extension on iOS
